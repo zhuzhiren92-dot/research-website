@@ -15,6 +15,11 @@ const navItems = [
 export default function Layout() {
   return (
     <div className="site-shell">
+      <div className="ambient-flow" aria-hidden="true">
+        {Array.from({ length: 18 }, (_, index) => (
+          <span key={index} />
+        ))}
+      </div>
       <header className="site-header">
         <NavLink className="brand" to="/" aria-label="Go to home page">
           <span className="brand-mark">{profile.name.slice(0, 1)}</span>
@@ -63,3 +68,4 @@ export default function Layout() {
     </div>
   );
 }
+

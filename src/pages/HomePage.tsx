@@ -19,6 +19,11 @@ export default function HomePage() {
         style={{ backgroundImage: `url(${profile.heroImage})` }}
       >
         <div className="hero-overlay" />
+        <div className="hero-flow" aria-hidden="true">
+          {Array.from({ length: 16 }, (_, index) => (
+            <span key={index} />
+          ))}
+        </div>
         <div className="hero-inner">
           <span className="eyebrow">Personal Research Portfolio</span>
           <h1>{profile.name}</h1>
@@ -127,3 +132,4 @@ export default function HomePage() {
     </>
   );
 }
+
