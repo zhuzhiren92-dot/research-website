@@ -414,7 +414,7 @@ export default function App() {
             <div className="contact-main">
               <SectionHeader
                 eyebrow="Contact"
-                title="Collaboration and contact"
+                title={"Collaboration`nand contact"}
                 description={profile.contact.collaboration}
               />
               <div className="contact-actions">

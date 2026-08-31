@@ -1728,3 +1728,9 @@ p {
     height: 28px;
   }
 }
+
+/* Contact title wrapping fix */
+.contact-main .section-header h2 {
+  max-width: 650px;
+  white-space: pre-line;
+}
