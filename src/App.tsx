@@ -2,15 +2,12 @@ import type { CSSProperties } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   Activity,
-  AtSign,
   Bell,
   BookOpen,
-  CheckCircle2,
   Cpu,
   ExternalLink,
   FileText,
   FlaskConical,
-  Github,
   GraduationCap,
   Home as HomeIcon,
   Layers,
@@ -19,7 +16,7 @@ import {
   MapPin,
   Microscope,
   Network,
-  Send,
+  Phone,
   UserRound,
 } from 'lucide-react';
 import SectionHeader from './components/SectionHeader';
@@ -395,45 +392,54 @@ export default function App() {
         </section>
 
         <section id="contact" className={sectionClass('contact')}>
-          <div className="panel-content contact-design">
+          <div className="panel-content contact-design contact-reference">
             <div className="contact-main">
               <SectionHeader
                 eyebrow="Contact"
-                title="Collaboration and correspondence"
-                description="For research discussions, collaborative projects, academic visits, and public communication."
+                title="Collaboration and contact"
+                description={profile.contact.collaboration}
               />
-              <p>{profile.contact.collaboration}</p>
               <div className="contact-actions">
                 <a className="button primary" href={`mailto:${profile.contact.email}`}>
                   <Mail size={18} />
                   Email
                 </a>
-                <a className="button" href="https://github.com/zhuzhiren92-dot">
-                  <Github size={18} />
-                  GitHub
+                <a className="button orcid-button" href={profile.contact.orcidUrl}>
+                  <span className="orcid-dot">iD</span>
+                  ORCID
                 </a>
               </div>
             </div>
-            <div className="contact-grid">
-              <div>
-                <AtSign size={22} />
+            <div className="contact-card" aria-label="Contact details">
+              <div className="contact-row">
+                <span className="row-icon"><Mail size={24} /></span>
                 <span>Email</span>
                 <strong>{profile.contact.email}</strong>
               </div>
-              <div>
-                <MapPin size={22} />
-                <span>Office</span>
-                <strong>{profile.contact.office}</strong>
+              <div className="contact-row">
+                <span className="row-icon"><Phone size={24} /></span>
+                <span>Phone</span>
+                <strong>{profile.contact.phone}</strong>
               </div>
-              <div>
-                <Send size={22} />
-                <span>Best Topics</span>
-                <strong>Granular micromechanics, X-ray micro-CT, AI-enabled geomechanics</strong>
+              <div className="contact-row">
+                <span className="row-icon"><UserRound size={24} /></span>
+                <span>Affiliation</span>
+                <strong>{profile.contact.affiliation}</strong>
               </div>
-              <div>
-                <CheckCircle2 size={22} />
-                <span>Status</span>
-                <strong>Personal website draft ready for verified CV content</strong>
+              <div className="contact-row">
+                <span className="row-icon"><MapPin size={24} /></span>
+                <span>Address</span>
+                <strong>{profile.contact.address}</strong>
+              </div>
+              <div className="contact-row">
+                <span className="row-icon orcid-icon">iD</span>
+                <span>ORCID</span>
+                <strong>{profile.contact.orcid}</strong>
+              </div>
+              <div className="contact-row">
+                <span className="row-icon"><Network size={24} /></span>
+                <span>Research Topics</span>
+                <strong>{profile.contact.researchTopics}</strong>
               </div>
             </div>
           </div>

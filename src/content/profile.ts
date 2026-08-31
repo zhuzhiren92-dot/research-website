@@ -36,7 +36,7 @@ export const profile = {
   title: 'Postdoctoral Fellow in Geotechnical Engineering',
   affiliation: 'School of Architecture and Civil Engineering, City University of Hong Kong',
   location: 'Hong Kong SAR, China',
-  email: 'your.email@institution.edu',
+  email: 'zhirenzhu2@um.cityu.edu.hk',
   heroLine: 'Postdoctoral Fellow in Geotechnical Engineering',
   heroKeywords: [
     'Granular Micromechanics',
@@ -250,9 +250,16 @@ export const profile = {
     },
   ] satisfies NewsItem[],
   contact: {
-    email: 'your.email@institution.edu',
+    email: 'zhirenzhu2@um.cityu.edu.hk',
+    phone: '+852-5225-1432',
+    affiliation: 'School of Architecture and Civil Engineering, City University of Hong Kong',
+    address: '83 Tat Chee Ave, Kowloon Tong, Hong Kong',
+    orcid: '0000-0002-0874-9513',
+    orcidUrl: 'https://orcid.org/0000-0002-0874-9513',
+    researchTopics:
+      'micro-CT imaging / particle breakage / segmentation / 3D reconstruction / particle tracking',
     office: 'School of Architecture and Civil Engineering, City University of Hong Kong',
     collaboration:
-      'Open to collaborations on granular micromechanics, X-ray micro-CT, particle breakage, AI-enabled geomechanics, and computational modelling of geomaterials.',
+      'Open to collaboration in experimental geomechanics, X-ray microtomography, image analysis, and granular material mechanics.',
   },
 };
