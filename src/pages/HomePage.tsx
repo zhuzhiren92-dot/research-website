@@ -25,7 +25,6 @@ export default function HomePage() {
           ))}
         </div>
         <div className="hero-inner">
-          <span className="eyebrow">Personal Research Portfolio</span>
           <h1>{profile.name}</h1>
           <p className="hero-line">{profile.heroLine}</p>
           <p className="hero-summary">{profile.summary}</p>
@@ -132,4 +131,6 @@ export default function HomePage() {
     </>
   );
 }
+
+
 

@@ -2,13 +2,13 @@ import { GraduationCap, ListChecks } from 'lucide-react';
 import SectionHeader from '../components/SectionHeader';
 import { profile } from '../content/profile';
 
-export default function BiologyPage() {
+export default function BiographyPage() {
   return (
     <section className="page">
       <div className="container">
         <SectionHeader
-          eyebrow="Biology"
-          title="Research identity and methods"
+          eyebrow="Biography"
+          title="Research profile and expertise"
           description="Use this page for biography, training, research identity, and method-level expertise."
         />
         <div className="about-layout">
@@ -48,5 +48,6 @@ export default function BiologyPage() {
     </section>
   );
 }
+
 
 

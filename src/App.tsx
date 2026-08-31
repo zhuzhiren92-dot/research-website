@@ -18,7 +18,7 @@ import { profile } from './content/profile';
 
 const panels = [
   { id: 'home', label: 'Home' },
-  { id: 'biology', label: 'Biology' },
+  { id: 'biography', label: 'Biography' },
   { id: 'research', label: 'Research' },
   { id: 'publications', label: 'Publications' },
   { id: 'projects', label: 'Projects' },
@@ -26,7 +26,7 @@ const panels = [
   { id: 'contact', label: 'Contact' },
 ] as const;
 
-const navStep = 46;
+const navStep = 54;
 
 type PanelId = (typeof panels)[number]['id'];
 
@@ -51,6 +51,7 @@ export default function App() {
       block: 'start',
     });
   }, []);
+
   useEffect(() => {
     activeIndexRef.current = activeIndex;
   }, [activeIndex]);
@@ -126,7 +127,6 @@ export default function App() {
     return () => root.removeEventListener('wheel', onWheel);
   }, [scrollToPanel]);
 
-
   const sectionClass = (id: PanelId) => {
     const index = panels.findIndex((panel) => panel.id === id);
     return `snap-section ${id}-screen ${activeIndex === index ? 'is-active' : ''}`;
@@ -139,7 +139,7 @@ export default function App() {
   return (
     <div className="one-page-shell">
       <div className="ambient-flow" aria-hidden="true">
-        {Array.from({ length: 18 }, (_, index) => (
+        {Array.from({ length: 22 }, (_, index) => (
           <span key={index} />
         ))}
       </div>
@@ -154,7 +154,6 @@ export default function App() {
             onClick={() => scrollToPanel(index)}
             aria-current={activeIndex === index ? 'true' : undefined}
           >
-            <span>{String(index + 1).padStart(2, '0')}</span>
             {panel.label}
           </button>
         ))}
@@ -168,14 +167,18 @@ export default function App() {
         >
           <div className="hero-overlay" />
           <div className="hero-flow" aria-hidden="true">
-            {Array.from({ length: 16 }, (_, index) => (
+            {Array.from({ length: 20 }, (_, index) => (
               <span key={index} />
             ))}
           </div>
           <div className="panel-content home-content">
-            <span className="eyebrow">Personal Research Portfolio</span>
             <h1>{profile.name}</h1>
-            <p className="hero-line">{profile.heroLine}</p>
+            <p className="hero-role">{profile.heroLine}</p>
+            <ul className="hero-keywords" aria-label="Research keywords">
+              {profile.heroKeywords.map((keyword) => (
+                <li key={keyword}>{keyword}</li>
+              ))}
+            </ul>
             <p className="hero-summary">{profile.summary}</p>
             <div className="hero-actions">
               <button className="button primary" type="button" onClick={() => scrollToPanel(2)}>
@@ -190,13 +193,13 @@ export default function App() {
           </div>
         </section>
 
-        <section id="biology" className={sectionClass('biology')}>
-          <div className="panel-content two-zone biology-layout">
+        <section id="biography" className={sectionClass('biography')}>
+          <div className="panel-content two-zone biography-layout">
             <div>
               <SectionHeader
-                eyebrow="Biology"
-                title="Research identity and methods"
-                description="Use this section for biography, training, research focus, and method-level expertise."
+                eyebrow="Biography"
+                title="Research profile and expertise"
+                description="Geotechnical researcher exploring the particle-scale mechanics of granular materials through advanced imaging, data-driven methods, and computational modelling."
               />
               <div className="prose compact-prose">
                 {profile.biography.map((paragraph) => (
@@ -204,18 +207,24 @@ export default function App() {
                 ))}
               </div>
             </div>
-            <aside className="biology-card">
-              <img src={profile.portrait} alt={`${profile.name} profile placeholder`} />
+            <aside className="biography-card">
+              <img src={profile.portrait} alt={`${profile.name} portrait`} />
               <div className="fact-list">
                 <div>
                   <GraduationCap size={20} />
                   <span>Affiliation</span>
-                  <strong>{profile.affiliation}</strong>
+                  <strong>
+                    Postdoctoral Fellow
+                    <br />
+                    School of Architecture and Civil Engineering
+                    <br />
+                    City University of Hong Kong
+                  </strong>
                 </div>
                 <div>
                   <ListChecks size={20} />
                   <span>Methods</span>
-                  <strong>{profile.methods.slice(0, 3).join(' / ')}</strong>
+                  <strong>{profile.methods.join(' / ')}</strong>
                 </div>
               </div>
             </aside>
@@ -227,7 +236,7 @@ export default function App() {
             <SectionHeader
               eyebrow="Research"
               title="Research directions"
-              description="Each direction can hold a short research statement, experiment types, validation strategy, and related output."
+              description="Particle-scale observation, quantitative reconstruction, and computational modelling for crushable granular geomaterials."
             />
             <div className="theme-grid snap-grid">
               {profile.researchThemes.map((theme) => (
@@ -360,7 +369,7 @@ export default function App() {
               <div>
                 <Send size={20} />
                 <span>Best Topics</span>
-                <strong>Imaging, analysis workflows, reproducibility</strong>
+                <strong>Granular micromechanics, X-ray micro-CT, AI-enabled geomechanics</strong>
               </div>
               <div>
                 <CheckCircle2 size={20} />
@@ -374,4 +383,3 @@ export default function App() {
     </div>
   );
 }
-

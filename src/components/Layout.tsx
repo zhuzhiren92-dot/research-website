@@ -4,7 +4,7 @@ import { profile } from '../content/profile';
 
 const navItems = [
   { label: 'Home', to: '/' },
-  { label: 'Biology', to: '/biology' },
+  { label: 'Biography', to: '/biography' },
   { label: 'Research', to: '/research' },
   { label: 'Publications', to: '/publications' },
   { label: 'Projects', to: '/projects' },
@@ -68,5 +68,6 @@ export default function Layout() {
     </div>
   );
 }
+
 
 
