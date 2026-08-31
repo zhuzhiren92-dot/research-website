@@ -2,33 +2,50 @@ import type { CSSProperties } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   Activity,
+  AtSign,
+  Bell,
   BookOpen,
   CheckCircle2,
+  Cpu,
+  ExternalLink,
+  FileText,
   FlaskConical,
   Github,
   GraduationCap,
+  Home as HomeIcon,
+  Layers,
   ListChecks,
   Mail,
   MapPin,
   Microscope,
+  Network,
   Send,
+  UserRound,
 } from 'lucide-react';
 import SectionHeader from './components/SectionHeader';
 import { profile } from './content/profile';
 
 const panels = [
-  { id: 'home', label: 'Home' },
-  { id: 'biography', label: 'Biography' },
-  { id: 'research', label: 'Research' },
-  { id: 'publications', label: 'Publications' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'news', label: 'News' },
-  { id: 'contact', label: 'Contact' },
+  { id: 'home', label: 'Home', Icon: HomeIcon },
+  { id: 'biography', label: 'Biography', Icon: UserRound },
+  { id: 'research', label: 'Research', Icon: Network },
+  { id: 'publications', label: 'Publications', Icon: BookOpen },
+  { id: 'projects', label: 'Projects', Icon: Activity },
+  { id: 'news', label: 'News', Icon: Bell },
+  { id: 'contact', label: 'Contact', Icon: Mail },
 ] as const;
 
-const navStep = 54;
+const navStep = 70;
+const researchIcons = [Microscope, Layers, FlaskConical, Cpu] as const;
 
 type PanelId = (typeof panels)[number]['id'];
+
+function canScrollInside(element: HTMLElement, deltaY: number) {
+  const canScrollDown = element.scrollTop + element.clientHeight < element.scrollHeight - 2;
+  const canScrollUp = element.scrollTop > 2;
+
+  return deltaY > 0 ? canScrollDown : canScrollUp;
+}
 
 export default function App() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -45,6 +62,7 @@ export default function App() {
     const element = document.getElementById(panel.id);
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    activeIndexRef.current = index;
     setActiveIndex(index);
     element?.scrollIntoView({
       behavior: reducedMotion ? 'auto' : 'smooth',
@@ -101,6 +119,12 @@ export default function App() {
         return;
       }
 
+      const target = event.target as Element | null;
+      const nestedScroll = target?.closest('.scroll-window') as HTMLElement | null;
+      if (nestedScroll && canScrollInside(nestedScroll, event.deltaY)) {
+        return;
+      }
+
       event.preventDefault();
       if (wheelLockRef.current) {
         return;
@@ -139,24 +163,28 @@ export default function App() {
   return (
     <div className="one-page-shell">
       <div className="ambient-flow" aria-hidden="true">
-        {Array.from({ length: 22 }, (_, index) => (
+        {Array.from({ length: 24 }, (_, index) => (
           <span key={index} />
         ))}
       </div>
 
       <nav className="side-nav" aria-label="Section navigation" style={navStyle}>
         <span className="side-nav-indicator" aria-hidden="true" />
-        {panels.map((panel, index) => (
-          <button
-            key={panel.id}
-            type="button"
-            className={activeIndex === index ? 'active' : undefined}
-            onClick={() => scrollToPanel(index)}
-            aria-current={activeIndex === index ? 'true' : undefined}
-          >
-            {panel.label}
-          </button>
-        ))}
+        {panels.map((panel, index) => {
+          const Icon = panel.Icon;
+          return (
+            <button
+              key={panel.id}
+              type="button"
+              className={activeIndex === index ? 'active' : undefined}
+              onClick={() => scrollToPanel(index)}
+              aria-current={activeIndex === index ? 'true' : undefined}
+            >
+              <Icon size={23} strokeWidth={activeIndex === index ? 2.35 : 1.75} />
+              <span>{panel.label}</span>
+            </button>
+          );
+        })}
       </nav>
 
       <div className="snap-scroll" ref={scrollRef}>
@@ -194,32 +222,33 @@ export default function App() {
         </section>
 
         <section id="biography" className={sectionClass('biography')}>
-          <div className="panel-content two-zone biography-layout">
-            <div>
+          <div className="panel-content designed-layout biography-design">
+            <div className="design-copy biography-copy">
               <SectionHeader
                 eyebrow="Biography"
                 title="Research profile and expertise"
                 description="Geotechnical researcher exploring the particle-scale mechanics of granular materials through advanced imaging, data-driven methods, and computational modelling."
               />
-              <div className="prose compact-prose">
+              <div className="biography-prose">
                 {profile.biography.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}
               </div>
             </div>
-            <aside className="biography-card">
-              <img src={profile.portrait} alt={`${profile.name} portrait`} />
-              <div className="fact-list">
+            <aside className="profile-board" aria-label="Biography details">
+              <div className="portrait-frame">
+                <img src={profile.portrait} alt={`${profile.name} portrait`} />
+              </div>
+              <div className="identity-block">
+                <span>Current Position</span>
+                <strong>Postdoctoral Fellow</strong>
+                <small>Geotechnical Engineering</small>
+              </div>
+              <div className="bio-facts">
                 <div>
                   <GraduationCap size={20} />
                   <span>Affiliation</span>
-                  <strong>
-                    Postdoctoral Fellow
-                    <br />
-                    School of Architecture and Civil Engineering
-                    <br />
-                    City University of Hong Kong
-                  </strong>
+                  <strong>School of Architecture and Civil Engineering, City University of Hong Kong</strong>
                 </div>
                 <div>
                   <ListChecks size={20} />
@@ -232,42 +261,62 @@ export default function App() {
         </section>
 
         <section id="research" className={sectionClass('research')}>
-          <div className="panel-content">
-            <SectionHeader
-              eyebrow="Research"
-              title="Research directions"
-              description="Particle-scale observation, quantitative reconstruction, and computational modelling for crushable granular geomaterials."
-            />
-            <div className="theme-grid snap-grid">
-              {profile.researchThemes.map((theme) => (
-                <article className="theme-card" key={theme.title}>
-                  <FlaskConical size={22} />
-                  <h3>{theme.title}</h3>
-                  <p>{theme.summary}</p>
-                  <ul>
-                    {theme.points.map((point) => (
-                      <li key={point}>{point}</li>
-                    ))}
-                  </ul>
-                </article>
-              ))}
+          <div className="panel-content research-design">
+            <div className="research-copy">
+              <SectionHeader
+                eyebrow="Research"
+                title="Research directions"
+                description="My research integrates experimental geomechanics, X-ray imaging, and computational analysis to study granular geomaterials from particle to specimen scale."
+              />
+              <span className="section-rule" aria-hidden="true" />
+            </div>
+            <div className="research-card-grid">
+              {profile.researchThemes.map((theme, index) => {
+                const Icon = researchIcons[index] ?? FlaskConical;
+                return (
+                  <article className={`research-card accent-${index + 1}`} key={theme.title}>
+                    <div className="research-icon">
+                      <Icon size={46} strokeWidth={1.75} />
+                    </div>
+                    <h3>{theme.title}</h3>
+                    <span className="card-rule" aria-hidden="true" />
+                    <ul>
+                      {theme.points.map((point) => (
+                        <li key={point}>{point}</li>
+                      ))}
+                    </ul>
+                  </article>
+                );
+              })}
             </div>
           </div>
         </section>
 
         <section id="publications" className={sectionClass('publications')}>
-          <div className="panel-content">
-            <SectionHeader
-              eyebrow="Publications"
-              title="Selected papers and manuscripts"
-              description="Replace placeholders with verified titles, authors, venues, years, DOI links, code links, and PDF links."
-            />
-            <div className="publication-list compact-list">
+          <div className="panel-content designed-layout publications-design">
+            <div className="design-copy">
+              <SectionHeader
+                eyebrow="Publications"
+                title="Selected papers and manuscripts"
+                description="A compact publication index for verified journal papers, conference papers, preprints, datasets, and code-linked manuscripts."
+              />
+              <div className="section-metrics" aria-label="Publication summary">
+                <div>
+                  <strong>{profile.publications.length}</strong>
+                  <span>records</span>
+                </div>
+                <div>
+                  <strong>DOI</strong>
+                  <span>ready</span>
+                </div>
+              </div>
+            </div>
+            <div className="scroll-window publication-window" aria-label="Publication list">
               {profile.publications.map((paper) => (
-                <article className="publication-item" key={`${paper.year}-${paper.title}`}>
+                <article className="publication-tile" key={`${paper.year}-${paper.title}-${paper.venue}`}>
                   <div className="publication-year">{paper.year}</div>
-                  <div>
-                    <h2>{paper.title}</h2>
+                  <div className="publication-body">
+                    <h3>{paper.title}</h3>
                     <p className="authors">{paper.authors}</p>
                     <p>{paper.venue}</p>
                     <div className="meta-row">
@@ -276,6 +325,9 @@ export default function App() {
                       ))}
                     </div>
                   </div>
+                  <a className="icon-link" href={paper.links?.[0]?.href ?? '#'} aria-label="Publication link">
+                    <ExternalLink size={18} />
+                  </a>
                 </article>
               ))}
             </div>
@@ -283,28 +335,30 @@ export default function App() {
         </section>
 
         <section id="projects" className={sectionClass('projects')}>
-          <div className="panel-content">
-            <SectionHeader
-              eyebrow="Projects"
-              title="Experiments, tools, and workflows"
-              description="Use project entries for completed experiments, active methods, software tools, datasets, and public academic materials."
-            />
-            <div className="project-grid snap-grid">
+          <div className="panel-content designed-layout projects-design">
+            <div className="design-copy">
+              <SectionHeader
+                eyebrow="Projects"
+                title="Experiments, tools, and workflows"
+                description="A vertical project board for experiments, methods, datasets, software workflows, and public academic materials."
+              />
+              <div className="project-focus">
+                {profile.focusAreas.map((area) => (
+                  <span key={area}>{area}</span>
+                ))}
+              </div>
+            </div>
+            <div className="scroll-window project-window" aria-label="Project list">
               {profile.projects.map((project) => (
-                <article className="project-card" key={project.title}>
+                <article className="project-tile" key={project.title}>
                   <div className="card-topline">
-                    <Activity size={20} />
+                    <Activity size={18} />
                     <span>{project.status}</span>
                   </div>
-                  <h2>{project.title}</h2>
+                  <h3>{project.title}</h3>
                   <p>{project.summary}</p>
-                  <ul>
-                    {project.outcomes.slice(0, 2).map((outcome) => (
-                      <li key={outcome}>{outcome}</li>
-                    ))}
-                  </ul>
                   <div className="meta-row">
-                    {project.tags.slice(0, 3).map((tag) => (
+                    {project.tags.map((tag) => (
                       <span key={tag}>{tag}</span>
                     ))}
                   </div>
@@ -315,18 +369,23 @@ export default function App() {
         </section>
 
         <section id="news" className={sectionClass('news')}>
-          <div className="panel-content narrow-panel">
-            <SectionHeader
-              eyebrow="News"
-              title="Research notes and updates"
-              description="Keep this list selective: papers, experiments, talks, releases, awards, students, and public resources."
-            />
-            <div className="timeline compact-list">
+          <div className="panel-content designed-layout news-design">
+            <div className="design-copy">
+              <SectionHeader
+                eyebrow="News"
+                title="Research notes and updates"
+                description="A selective stream for paper progress, experiments, talks, releases, awards, and collaboration milestones."
+              />
+              <div className="news-orbit" aria-hidden="true">
+                <FileText size={34} />
+              </div>
+            </div>
+            <div className="scroll-window news-window" aria-label="News list">
               {profile.news.map((item) => (
-                <article key={`${item.date}-${item.title}`}>
+                <article className="news-tile" key={`${item.date}-${item.title}`}>
                   <time>{item.date}</time>
                   <div>
-                    <h2>{item.title}</h2>
+                    <h3>{item.title}</h3>
                     <p>{item.description}</p>
                   </div>
                 </article>
@@ -336,12 +395,12 @@ export default function App() {
         </section>
 
         <section id="contact" className={sectionClass('contact')}>
-          <div className="panel-content two-zone contact-layout">
+          <div className="panel-content contact-design">
             <div className="contact-main">
               <SectionHeader
                 eyebrow="Contact"
                 title="Collaboration and correspondence"
-                description="Replace draft email and office information with public contact details before sharing the site widely."
+                description="For research discussions, collaborative projects, academic visits, and public communication."
               />
               <p>{profile.contact.collaboration}</p>
               <div className="contact-actions">
@@ -355,24 +414,24 @@ export default function App() {
                 </a>
               </div>
             </div>
-            <div className="contact-details">
+            <div className="contact-grid">
               <div>
-                <Mail size={20} />
+                <AtSign size={22} />
                 <span>Email</span>
                 <strong>{profile.contact.email}</strong>
               </div>
               <div>
-                <MapPin size={20} />
+                <MapPin size={22} />
                 <span>Office</span>
                 <strong>{profile.contact.office}</strong>
               </div>
               <div>
-                <Send size={20} />
+                <Send size={22} />
                 <span>Best Topics</span>
                 <strong>Granular micromechanics, X-ray micro-CT, AI-enabled geomechanics</strong>
               </div>
               <div>
-                <CheckCircle2 size={20} />
+                <CheckCircle2 size={22} />
                 <span>Status</span>
                 <strong>Personal website draft ready for verified CV content</strong>
               </div>
