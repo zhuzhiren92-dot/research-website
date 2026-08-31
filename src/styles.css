@@ -1364,3 +1364,219 @@ p {
     transition: none;
   }
 }
+
+/* Biography alignment revision */
+.snap-section:not(.home-screen) {
+  padding: clamp(44px, 6vw, 86px) clamp(250px, 15.5vw, 318px) clamp(44px, 6vw, 86px) clamp(70px, 6.2vw, 124px);
+}
+
+.snap-section:not(.home-screen) .panel-content {
+  width: min(1500px, 100%);
+  margin-inline: auto;
+}
+
+.snap-section:not(.home-screen) .biography-design {
+  grid-template-columns: minmax(620px, 720px) minmax(430px, 460px);
+  gap: clamp(90px, 10vw, 180px);
+  justify-content: space-between;
+  align-items: center;
+}
+
+.biography-copy {
+  max-width: 720px;
+}
+
+.biography-copy .section-header h2 {
+  max-width: 700px;
+  margin-bottom: 24px;
+  font-size: clamp(4.2rem, 5.7vw, 6.15rem);
+  line-height: 0.96;
+}
+
+.biography-copy .section-header p {
+  max-width: 710px;
+  color: #284a81;
+  font-size: clamp(1.05rem, 1.22vw, 1.2rem);
+  line-height: 1.62;
+}
+
+.biography-prose {
+  gap: 22px;
+  max-width: 700px;
+  padding-top: 2px;
+}
+
+.biography-prose p {
+  color: #263f70;
+  font-size: clamp(1rem, 1.08vw, 1.1rem);
+  line-height: 1.68;
+}
+
+.profile-board {
+  width: 100%;
+  max-width: 460px;
+  padding: 26px 30px 28px;
+  gap: 24px;
+  border-radius: 16px;
+}
+
+.profile-board::before {
+  inset: 18px;
+  border-radius: 12px;
+}
+
+.portrait-frame {
+  width: 100%;
+  max-width: 360px;
+  padding: 12px;
+  border-radius: 18px;
+}
+
+.portrait-frame img {
+  border-radius: 12px;
+}
+
+.bio-facts {
+  gap: 0;
+}
+
+.bio-fact-row {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  column-gap: 20px;
+  align-items: start;
+  padding: 20px 0;
+  border-top: 1px solid rgba(31, 89, 180, 0.12);
+}
+
+.bio-fact-row:first-child {
+  padding-top: 22px;
+}
+
+.bio-fact-row svg {
+  grid-row: 1 / span 2;
+  margin-top: 2px;
+  color: var(--blue);
+}
+
+.bio-fact-row > span {
+  color: var(--blue);
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.bio-fact-row strong {
+  margin-top: 7px;
+  color: #102044;
+  font-size: clamp(1rem, 1.08vw, 1.12rem);
+  font-weight: 820;
+  line-height: 1.42;
+}
+
+.stacked-lines {
+  display: grid;
+  gap: 4px;
+}
+
+.stacked-lines span {
+  display: block;
+}
+
+.research-design {
+  width: min(1500px, 100%);
+}
+
+.publications-design,
+.projects-design,
+.news-design {
+  grid-template-columns: minmax(400px, 0.55fr) minmax(680px, 1fr);
+  gap: clamp(64px, 7vw, 118px);
+}
+
+.snap-section:not(.home-screen) .contact-design {
+  width: min(1180px, 100%);
+}
+
+@media (max-width: 1280px) {
+  .snap-section:not(.home-screen) {
+    padding-right: 246px;
+    padding-left: clamp(38px, 6vw, 84px);
+  }
+
+  .snap-section:not(.home-screen) .biography-design {
+    grid-template-columns: minmax(0, 1fr) minmax(360px, 420px);
+    gap: 44px;
+  }
+
+  .biography-copy .section-header h2 {
+    font-size: clamp(3.5rem, 6.2vw, 5.2rem);
+  }
+
+  .profile-board {
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 1080px) {
+  .snap-section:not(.home-screen) {
+    padding-right: 126px;
+    padding-left: 28px;
+  }
+
+  .snap-section:not(.home-screen) .panel-content {
+    width: 100%;
+  }
+
+  .snap-section:not(.home-screen) .biography-design,
+  .publications-design,
+  .projects-design,
+  .news-design,
+  .snap-section:not(.home-screen) .contact-design {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .profile-board {
+    width: min(540px, 100%);
+    max-width: none;
+    margin-left: 0;
+  }
+
+  .portrait-frame {
+    width: 220px;
+    max-width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 720px) {
+  .snap-section:not(.home-screen) {
+    padding: 26px 92px 26px 18px;
+  }
+
+  .biography-copy .section-header h2 {
+    font-size: clamp(2.8rem, 14vw, 3.8rem);
+  }
+
+  .biography-prose p {
+    font-size: 0.94rem;
+    line-height: 1.58;
+  }
+
+  .profile-board {
+    padding: 18px 20px;
+  }
+
+  .bio-fact-row {
+    grid-template-columns: 34px minmax(0, 1fr);
+    column-gap: 14px;
+    padding: 16px 0;
+  }
+
+  .bio-fact-row strong {
+    font-size: 0.96rem;
+  }
+}

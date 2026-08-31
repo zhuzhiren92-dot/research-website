@@ -71,6 +71,17 @@ export const profile = {
     'Machine Learning',
     'DEM',
   ],
+  education: [
+    'PhD, City University of Hong Kong',
+    'MS and BE, Hunan University',
+  ],
+  methodStack: [
+    'X-ray microtomography',
+    'Particle segmentation',
+    '3D reconstruction',
+    'Full-field tracking',
+    'Python / PFC / Avizo',
+  ],
   researchThemes: [
     {
       title: 'X-ray microtomography and in-situ testing',

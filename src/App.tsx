@@ -3,6 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   Activity,
   Bell,
+  Building2,
   BookOpen,
   Cpu,
   ExternalLink,
@@ -236,21 +237,38 @@ export default function App() {
               <div className="portrait-frame">
                 <img src={profile.portrait} alt={`${profile.name} portrait`} />
               </div>
-              <div className="identity-block">
-                <span>Current Position</span>
-                <strong>Postdoctoral Fellow</strong>
-                <small>Geotechnical Engineering</small>
-              </div>
               <div className="bio-facts">
-                <div>
-                  <GraduationCap size={20} />
+                <div className="bio-fact-row">
+                  <Building2 size={25} />
                   <span>Affiliation</span>
-                  <strong>School of Architecture and Civil Engineering, City University of Hong Kong</strong>
+                  <strong>
+                    School of Architecture and Civil Engineering
+                    <br />
+                    City University of Hong Kong
+                  </strong>
                 </div>
-                <div>
-                  <ListChecks size={20} />
+                <div className="bio-fact-row">
+                  <UserRound size={25} />
+                  <span>Position</span>
+                  <strong>Postdoctoral Fellow</strong>
+                </div>
+                <div className="bio-fact-row">
+                  <GraduationCap size={25} />
+                  <span>Education</span>
+                  <strong className="stacked-lines">
+                    {profile.education.map((item) => (
+                      <span key={item}>{item}</span>
+                    ))}
+                  </strong>
+                </div>
+                <div className="bio-fact-row">
+                  <ListChecks size={25} />
                   <span>Methods</span>
-                  <strong>{profile.methods.join(' / ')}</strong>
+                  <strong className="stacked-lines">
+                    {profile.methodStack.map((item) => (
+                      <span key={item}>{item}</span>
+                    ))}
+                  </strong>
                 </div>
               </div>
             </aside>
