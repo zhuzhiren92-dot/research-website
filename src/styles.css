@@ -1734,3 +1734,53 @@ p {
   max-width: 650px;
   white-space: pre-line;
 }
+
+/* Contact intro width refinement */
+.snap-section:not(.home-screen) .contact-design {
+  grid-template-columns: minmax(700px, 0.96fr) minmax(650px, 0.88fr);
+  gap: clamp(42px, 4vw, 72px);
+}
+
+.contact-main {
+  max-width: 780px;
+}
+
+.contact-main .section-header {
+  max-width: 780px;
+}
+
+.contact-main .section-header p {
+  width: min(760px, 100%);
+  max-width: 760px;
+}
+
+@media (max-width: 1280px) {
+  .snap-section:not(.home-screen) .contact-design {
+    grid-template-columns: minmax(500px, 0.86fr) minmax(560px, 0.92fr);
+    gap: 34px;
+  }
+
+  .contact-main .section-header p {
+    width: min(660px, 100%);
+    max-width: 660px;
+  }
+}
+
+@media (max-width: 1080px) {
+  .snap-section:not(.home-screen) .contact-design {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-main .section-header p {
+    width: min(720px, 100%);
+    max-width: 720px;
+  }
+}
+
+/* Contact action font refinement */
+.contact-actions .button {
+  min-width: 150px;
+  min-height: 62px;
+  padding: 14px 30px;
+  font-size: 1.1rem;
+}
