@@ -1376,40 +1376,40 @@ p {
 }
 
 .snap-section:not(.home-screen) .biography-design {
-  grid-template-columns: minmax(620px, 720px) minmax(430px, 460px);
-  gap: clamp(90px, 10vw, 180px);
+  grid-template-columns: minmax(760px, 900px) minmax(430px, 460px);
+  gap: clamp(64px, 5vw, 118px);
   justify-content: space-between;
   align-items: center;
 }
 
 .biography-copy {
-  max-width: 720px;
+  max-width: 900px;
 }
 
 .biography-copy .section-header h2 {
-  max-width: 700px;
+  max-width: 860px;
   margin-bottom: 24px;
   font-size: clamp(4.2rem, 5.7vw, 6.15rem);
   line-height: 0.96;
 }
 
 .biography-copy .section-header p {
-  max-width: 710px;
+  max-width: 900px;
   color: #284a81;
   font-size: clamp(1.05rem, 1.22vw, 1.2rem);
   line-height: 1.62;
 }
 
 .biography-prose {
-  gap: 22px;
-  max-width: 700px;
+  gap: 24px;
+  max-width: 900px;
   padding-top: 2px;
 }
 
 .biography-prose p {
-  color: #263f70;
-  font-size: clamp(1rem, 1.08vw, 1.1rem);
-  line-height: 1.68;
+  color: #223b6c;
+  font-size: clamp(1.12rem, 1.22vw, 1.24rem);
+  line-height: 1.66;
 }
 
 .profile-board {
