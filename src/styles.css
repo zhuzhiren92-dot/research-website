@@ -1387,7 +1387,7 @@ p {
 }
 
 .biography-copy .section-header h2 {
-  max-width: 860px;
+  max-width: 980px;
   margin-bottom: 24px;
   font-size: clamp(4.2rem, 5.7vw, 6.15rem);
   line-height: 0.96;
