@@ -209,12 +209,36 @@ export default function App() {
             <div className="hero-actions">
               <button className="button primary" type="button" onClick={() => scrollToPanel(2)}>
                 <Microscope size={18} />
-                Research
+                研究
               </button>
-              <button className="button" type="button" onClick={() => scrollToPanel(3)}>
+              <button className="button secondary" type="button" onClick={() => scrollToPanel(3)}>
                 <BookOpen size={18} />
-                Publications
+                出版物
               </button>
+              <a className="button tertiary" href={profile.cvUrl} download="CV_EN_Zhu_Zhiren.pdf">
+                <FileText size={18} />
+                简历
+              </a>
+            </div>
+            <div className="hero-metrics" aria-label="Research metrics">
+              {profile.heroMetrics.map((metric) => (
+                <div className="hero-metric" key={`${metric.value}-${metric.label.join('-')}`}>
+                  <strong>{metric.value}</strong>
+                  <span>
+                    {metric.label.map((line) => (
+                      <span key={line}>{line}</span>
+                    ))}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <div className="hero-workflow" aria-label="Research workflow">
+              {profile.researchWorkflow.map((step, index) => (
+                <span key={step}>
+                  {step}
+                  {index < profile.researchWorkflow.length - 1 && <i aria-hidden="true">→</i>}
+                </span>
+              ))}
             </div>
           </div>
         </section>
