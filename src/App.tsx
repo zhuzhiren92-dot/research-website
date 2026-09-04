@@ -188,72 +188,46 @@ export default function App() {
       <div className="snap-scroll" ref={scrollRef}>
         <section id="home" className={sectionClass('home')}>
           <div className="hero-overlay" />
-          <div className="hero-flow ct-field" aria-hidden="true">
-            <svg className="ct-network" viewBox="0 0 1200 720" role="presentation">
-              <defs>
-                <linearGradient id="forceGradient" x1="0" x2="1" y1="0" y2="1">
-                  <stop offset="0%" stopColor="#0b5cff" />
-                  <stop offset="54%" stopColor="#05b8d9" />
-                  <stop offset="100%" stopColor="#f59e0b" />
-                </linearGradient>
-                <filter id="ctGlow" x="-40%" y="-40%" width="180%" height="180%">
-                  <feGaussianBlur stdDeviation="4" result="blur" />
-                  <feMerge>
-                    <feMergeNode in="blur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
-              <g className="ct-slice-rings">
-                <circle cx="760" cy="225" r="182" />
-                <circle cx="760" cy="225" r="132" />
-                <circle cx="760" cy="225" r="86" />
-                <circle cx="958" cy="420" r="150" />
-                <circle cx="958" cy="420" r="104" />
-                <circle cx="548" cy="455" r="124" />
-              </g>
-              <g className="ct-grid-lines">
-                <path d="M430 90 C565 142 650 180 742 238 C850 306 932 346 1092 388" />
-                <path d="M390 336 C526 298 610 286 735 312 C865 340 965 326 1110 262" />
-                <path d="M470 588 C618 506 694 468 814 466 C930 464 1014 516 1128 610" />
-              </g>
-              <g className="tracking-traces">
-                <path d="M518 374 C594 326 658 300 742 322 C824 342 876 302 942 246" />
-                <path d="M612 498 C676 452 750 426 828 450 C906 474 988 446 1072 386" />
-                <path d="M660 192 C716 246 768 278 842 272 C910 268 966 218 1038 164" />
-              </g>
-              <g className="force-chains">
-                <path className="force-link force-link-main" d="M548 438 L642 374 L736 402 L824 338 L914 372 L1016 308" />
-                <path className="force-link force-link-secondary" d="M664 518 L736 462 L822 484 L896 430 L980 460" />
-                <path className="force-link force-link-secondary" d="M622 252 L704 308 L798 286 L884 228" />
-              </g>
-              <g className="ct-fragments">
-                <path d="M720 162 L768 184 L750 232 L696 224 L680 188 Z" />
-                <path d="M910 250 L954 272 L944 318 L896 322 L878 286 Z" />
-                <path d="M820 516 L864 530 L850 574 L804 568 L790 536 Z" />
-              </g>
-              <g className="ct-particles">
-                <circle className="ct-node node-large" cx="548" cy="438" r="46" />
-                <circle className="ct-node-core" cx="548" cy="438" r="10" />
-                <circle className="ct-node" cx="642" cy="374" r="34" />
-                <circle className="ct-node-core" cx="642" cy="374" r="8" />
-                <circle className="ct-node node-large" cx="736" cy="402" r="52" />
-                <circle className="ct-node-core" cx="736" cy="402" r="10" />
-                <circle className="ct-node" cx="824" cy="338" r="38" />
-                <circle className="ct-node-core" cx="824" cy="338" r="8" />
-                <circle className="ct-node node-large" cx="914" cy="372" r="58" />
-                <circle className="ct-node-core" cx="914" cy="372" r="11" />
-                <circle className="ct-node" cx="1016" cy="308" r="40" />
-                <circle className="ct-node-core" cx="1016" cy="308" r="8" />
-                <circle className="ct-node" cx="664" cy="518" r="30" />
-                <circle className="ct-node" cx="822" cy="484" r="32" />
-                <circle className="ct-node" cx="980" cy="460" r="36" />
-                <circle className="ct-node" cx="622" cy="252" r="28" />
-                <circle className="ct-node" cx="798" cy="286" r="30" />
-                <circle className="ct-node" cx="884" cy="228" r="34" />
-              </g>
-            </svg>
-            <span className="ct-scan-beam" />
+          <div className="hero-flow ct-story" aria-hidden="true">
+            <div className="ct-orbit">
+              <span />
+              <span />
+              <span />
+            </div>
+            <div className="ct-slice-stage">
+              <img
+                className="ct-slice ct-slice-raw"
+                src={`${import.meta.env.BASE_URL}home-ct-slice.jpg`}
+                alt=""
+              />
+              <img
+                className="ct-slice ct-slice-segmented"
+                src={`${import.meta.env.BASE_URL}home-ct-segmentation.png`}
+                alt=""
+              />
+              <span className="ct-slice-scan" />
+            </div>
+            <div className="reconstruction-stage">
+              <div className="reconstruction-shell">
+                <img
+                  className="reconstruction-image reconstruction-mono"
+                  src={`${import.meta.env.BASE_URL}home-reconstruction-mono-alpha.png`}
+                  alt=""
+                />
+                <img
+                  className="reconstruction-image reconstruction-color"
+                  src={`${import.meta.env.BASE_URL}home-reconstruction-segmented-alpha.png`}
+                  alt=""
+                />
+                <img
+                  className="reconstruction-image force-chain-overlay"
+                  src={`${import.meta.env.BASE_URL}home-force-chain-gpt-overlay.png`}
+                  alt=""
+                />
+                <span className="volume-scan" />
+              </div>
+            </div>
+            <span className="data-sweep" />
           </div>
           <div className="panel-content home-content">
             <h1>{profile.name}</h1>

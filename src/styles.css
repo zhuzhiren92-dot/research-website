@@ -252,142 +252,198 @@ p {
   pointer-events: none;
 }
 
-.ct-field {
-  opacity: 0.9;
+.ct-story {
+  opacity: 0.96;
   mix-blend-mode: multiply;
-  mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.06) 0%, rgba(0, 0, 0, 0.34) 28%, #000000 48%, #000000 100%);
+  mask-image: linear-gradient(90deg, transparent 15%, rgba(0, 0, 0, 0.16) 34%, #000000 50%, #000000 100%);
 }
 
-.ct-network {
-  position: absolute;
-  inset: -6% -5% -4% 24%;
-  width: 80%;
-  height: 112%;
-  overflow: visible;
-  animation: networkDrift 12s ease-in-out infinite;
-}
-
-.ct-slice-rings {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: ringBreath 7.5s ease-in-out infinite;
-}
-
-.ct-slice-rings circle {
-  fill: none;
-  stroke: rgba(31, 89, 180, 0.14);
-  stroke-width: 1.4;
-  vector-effect: non-scaling-stroke;
-}
-
-.ct-grid-lines path {
-  fill: none;
-  stroke: rgba(31, 89, 180, 0.12);
-  stroke-width: 1.2;
-  vector-effect: non-scaling-stroke;
-}
-
-.tracking-traces path {
-  fill: none;
-  filter: url(#ctGlow);
-  stroke: rgba(11, 92, 255, 0.34);
-  stroke-dasharray: 10 14;
-  stroke-linecap: round;
-  stroke-width: 2.4;
-  vector-effect: non-scaling-stroke;
-  animation: traceDash 8.5s linear infinite;
-}
-
-.tracking-traces path:nth-child(2) {
-  animation-delay: -2.8s;
-}
-
-.tracking-traces path:nth-child(3) {
-  animation-delay: -5.2s;
-}
-
-.force-link {
-  fill: none;
-  filter: url(#ctGlow);
-  stroke: url(#forceGradient);
-  stroke-dasharray: 20 14;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  vector-effect: non-scaling-stroke;
-  animation: forceDash 5.8s ease-in-out infinite;
-}
-
-.force-link-main {
-  stroke-width: 4.2;
-}
-
-.force-link-secondary {
-  opacity: 0.68;
-  stroke-width: 2.6;
-  animation-delay: -2.1s;
-}
-
-.ct-node,
-.ct-node-core,
-.ct-fragments path {
-  transform-box: fill-box;
-  transform-origin: center;
-}
-
-.ct-node {
-  fill: rgba(191, 231, 248, 0.44);
-  stroke: rgba(11, 92, 255, 0.24);
-  stroke-width: 2;
-  vector-effect: non-scaling-stroke;
-  animation: nodePulse 5.8s ease-in-out infinite;
-}
-
-.ct-node:nth-child(4n) {
-  animation-delay: -1.6s;
-}
-
-.ct-node:nth-child(5n) {
-  animation-delay: -3.2s;
-}
-
-.node-large {
-  fill: rgba(182, 225, 245, 0.52);
-  stroke: rgba(5, 184, 217, 0.26);
-}
-
-.ct-node-core {
-  fill: rgba(24, 168, 111, 0.34);
-  filter: url(#ctGlow);
-  animation: nodePulse 4.6s ease-in-out infinite;
-}
-
-.ct-fragments path {
-  fill: rgba(11, 92, 255, 0.09);
-  stroke: rgba(15, 27, 63, 0.2);
-  stroke-width: 1.1;
-  vector-effect: non-scaling-stroke;
-  animation: fragmentDrift 9s ease-in-out infinite;
-}
-
-.ct-fragments path:nth-child(2) {
-  animation-delay: -2.4s;
-}
-
-.ct-fragments path:nth-child(3) {
-  animation-delay: -4.8s;
-}
-
-.ct-scan-beam {
+.ct-orbit {
   position: absolute;
   top: -18%;
-  bottom: -18%;
-  left: 48%;
-  width: 14vw;
-  background: linear-gradient(90deg, transparent 0%, rgba(11, 92, 255, 0.08) 48%, rgba(24, 168, 111, 0.07) 56%, transparent 100%);
-  filter: blur(1px);
-  transform: translateX(-18vw) rotate(12deg);
-  animation: scanSweep 7.8s ease-in-out infinite;
+  left: 39%;
+  width: min(54vw, 940px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(11, 92, 255, 0.1);
+  border-radius: 50%;
+  animation: ctOrbitSpin 38s linear infinite;
 }
+
+.ct-orbit::before,
+.ct-orbit::after,
+.ct-orbit span {
+  position: absolute;
+  border: 1px solid rgba(11, 92, 255, 0.11);
+  border-radius: 50%;
+  content: '';
+}
+
+.ct-orbit::before {
+  inset: 11%;
+}
+
+.ct-orbit::after {
+  inset: 23%;
+  border-style: dashed;
+}
+
+.ct-orbit span:nth-child(1) {
+  inset: 34%;
+}
+
+.ct-orbit span:nth-child(2) {
+  top: 49.5%;
+  right: -7%;
+  left: -7%;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid rgba(0, 184, 217, 0.13);
+  border-radius: 0;
+}
+
+.ct-orbit span:nth-child(3) {
+  top: -7%;
+  bottom: -7%;
+  left: 49.5%;
+  width: 1px;
+  border: 0;
+  border-left: 1px solid rgba(0, 184, 217, 0.13);
+  border-radius: 0;
+}
+
+.ct-slice-stage {
+  position: absolute;
+  top: 17%;
+  left: 42%;
+  width: clamp(320px, 29vw, 560px);
+  aspect-ratio: 1;
+  opacity: 0.34;
+  animation: ctSliceFloat 13s ease-in-out infinite;
+}
+
+.ct-slice-stage::before,
+.ct-slice-stage::after {
+  position: absolute;
+  z-index: 3;
+  border: 1px solid rgba(11, 92, 255, 0.22);
+  border-radius: 50%;
+  content: '';
+  inset: 3%;
+}
+
+.ct-slice-stage::after {
+  border-color: rgba(0, 184, 217, 0.19);
+  border-style: dashed;
+  inset: 12%;
+}
+
+.ct-slice {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  mask-image: radial-gradient(circle, #000000 0 62%, rgba(0, 0, 0, 0.72) 72%, transparent 83%);
+}
+
+.ct-slice-raw {
+  filter: invert(1) grayscale(1) contrast(1.4) brightness(1.1);
+  mix-blend-mode: multiply;
+  opacity: 0.82;
+}
+
+.ct-slice-segmented {
+  filter: grayscale(0.25) hue-rotate(135deg) saturate(0.72) brightness(1.2);
+  mix-blend-mode: screen;
+  animation: segmentationReveal 12s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.ct-slice-scan {
+  position: absolute;
+  z-index: 4;
+  top: 8%;
+  bottom: 8%;
+  left: 4%;
+  width: 12%;
+  background: linear-gradient(90deg, transparent, rgba(0, 184, 217, 0.2), rgba(255, 255, 255, 0.8), transparent);
+  filter: blur(0.5px) drop-shadow(0 0 10px rgba(11, 92, 255, 0.42));
+  opacity: 0;
+  animation: scanSlice 12s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.reconstruction-stage {
+  position: absolute;
+  top: 3%;
+  right: clamp(280px, 16vw, 390px);
+  width: clamp(270px, 24vw, 440px);
+  height: 94%;
+  opacity: 0.74;
+  animation: reconstructionFloat 14s ease-in-out infinite;
+}
+
+.reconstruction-shell,
+.reconstruction-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.reconstruction-shell {
+  mask-image: linear-gradient(180deg, transparent 0%, #000000 8%, #000000 91%, transparent 100%);
+}
+
+.reconstruction-image {
+  object-fit: contain;
+  object-position: center;
+}
+
+.reconstruction-mono {
+  filter: grayscale(1) contrast(1.12) brightness(1.05);
+  mix-blend-mode: multiply;
+  animation: reconstructionMonoCycle 12s ease-in-out infinite;
+}
+
+.reconstruction-color {
+  z-index: 1;
+  filter: saturate(0.64) contrast(1.06) hue-rotate(8deg);
+  mix-blend-mode: multiply;
+  animation: reconstructionColorReveal 12s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.force-chain-overlay {
+  z-index: 2;
+  mix-blend-mode: screen;
+  opacity: 0;
+  animation: forceChainOverlayCycle 12s ease-in-out infinite;
+}
+
+.volume-scan {
+  position: absolute;
+  z-index: 3;
+  top: 2%;
+  bottom: 2%;
+  left: -8%;
+  width: 16%;
+  background: linear-gradient(90deg, transparent, rgba(11, 92, 255, 0.12), rgba(100, 242, 209, 0.5), rgba(255, 255, 255, 0.86), transparent);
+  filter: blur(1px) drop-shadow(0 0 14px rgba(0, 184, 217, 0.5));
+  opacity: 0;
+  animation: volumeScan 12s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.data-sweep {
+  position: absolute;
+  z-index: 5;
+  right: 13%;
+  left: 38%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(11, 92, 255, 0.14), rgba(0, 184, 217, 0.72), rgba(100, 242, 209, 0.18), transparent);
+  box-shadow: 0 0 18px rgba(0, 184, 217, 0.25);
+  opacity: 0;
+  animation: dataSweep 12s ease-in-out infinite;
+}
+
 .panel-content {
   position: relative;
   z-index: 2;
@@ -1310,90 +1366,152 @@ p {
   }
 }
 
-@keyframes networkDrift {
+@keyframes ctOrbitSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ctSliceFloat {
   0%,
   100% {
-    transform: translate3d(0, 0, 0) scale(1);
+    transform: translate3d(0, 0, 0) rotate(-1deg) scale(0.985);
   }
   50% {
-    transform: translate3d(-18px, 10px, 0) scale(1.015);
+    transform: translate3d(-14px, 10px, 0) rotate(1.2deg) scale(1.018);
   }
 }
 
-@keyframes ringBreath {
+@keyframes reconstructionFloat {
   0%,
   100% {
-    opacity: 0.62;
-    transform: scale(0.985);
+    transform: translate3d(0, 0, 0);
   }
   50% {
-    opacity: 0.94;
-    transform: scale(1.018);
+    transform: translate3d(8px, -9px, 0);
   }
 }
 
-@keyframes traceDash {
-  0% {
-    stroke-dashoffset: 0;
-  }
-  100% {
-    stroke-dashoffset: -160;
-  }
-}
-
-@keyframes forceDash {
-  0% {
-    opacity: 0.28;
-    stroke-dashoffset: 96;
-  }
-  42% {
-    opacity: 0.92;
-  }
-  100% {
-    opacity: 0.38;
-    stroke-dashoffset: -96;
-  }
-}
-
-@keyframes nodePulse {
+@keyframes reconstructionMonoCycle {
   0%,
+  24%,
   100% {
-    opacity: 0.54;
-    transform: scale(0.96);
+    opacity: 0.64;
   }
-  50% {
-    opacity: 0.9;
-    transform: scale(1.07);
+  54% {
+    opacity: 0.24;
+  }
+  68%,
+  96% {
+    opacity: 0;
   }
 }
 
-@keyframes fragmentDrift {
+@keyframes reconstructionColorReveal {
   0%,
+  22%,
   100% {
-    opacity: 0.46;
-    transform: translate3d(0, 0, 0) rotate(0deg);
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
   }
-  50% {
-    opacity: 0.72;
-    transform: translate3d(8px, -6px, 0) rotate(3deg);
+  42%,
+  60% {
+    clip-path: inset(0 0 0 0);
+    opacity: 0.82;
+  }
+  68%,
+  94% {
+    clip-path: inset(0 0 0 0);
+    opacity: 0.78;
+  }
+}
+@keyframes segmentationReveal {
+  0%,
+  10%,
+  100% {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0.08;
+  }
+  52%,
+  82% {
+    clip-path: inset(0 0 0 0);
+    opacity: 0.82;
   }
 }
 
-@keyframes scanSweep {
+@keyframes scanSlice {
   0%,
+  8%,
   100% {
     opacity: 0;
-    transform: translateX(-20vw) rotate(12deg);
+    transform: translateX(0);
   }
   18%,
-  76% {
-    opacity: 1;
+  72% {
+    opacity: 0.95;
   }
-  88% {
+  82% {
     opacity: 0;
-    transform: translateX(34vw) rotate(12deg);
+    transform: translateX(720%);
   }
 }
+
+@keyframes volumeScan {
+  0%,
+  8%,
+  100% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  18%,
+  72% {
+    opacity: 0.92;
+  }
+  82% {
+    opacity: 0;
+    transform: translateX(690%);
+  }
+}
+
+@keyframes forceChainOverlayCycle {
+  0%,
+  60%,
+  100% {
+    clip-path: inset(0 0 100% 0);
+    opacity: 0;
+  }
+  67% {
+    clip-path: inset(0 0 88% 0);
+    opacity: 0.24;
+  }
+  82%,
+  94% {
+    clip-path: inset(0 0 0 0);
+    opacity: 0.82;
+  }
+  98% {
+    clip-path: inset(0 0 0 0);
+    opacity: 0;
+  }
+}
+
+@keyframes dataSweep {
+  0%,
+  10%,
+  100% {
+    top: 12%;
+    opacity: 0;
+  }
+  20%,
+  70% {
+    opacity: 0.72;
+  }
+  84% {
+    top: 88%;
+    opacity: 0;
+  }
+}
+
 @keyframes gridDrift {
   0% {
     background-position: 0 0, 0 0, 0 0;
@@ -2035,9 +2153,17 @@ p {
 }
 
 @media (max-width: 1080px) {
-  .ct-network {
-    inset: -4% -12% -3% 14%;
-    width: 96%;
+  .ct-slice-stage {
+    top: 24%;
+    left: 35%;
+    width: 46vw;
+    opacity: 0.24;
+  }
+
+  .reconstruction-stage {
+    right: 13%;
+    width: 34vw;
+    opacity: 0.58;
   }
 
   .hero-metrics {
@@ -2063,20 +2189,35 @@ p {
 }
 
 @media (max-width: 720px) {
-  .ct-field {
-    opacity: 0.54;
-    mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.06) 0%, rgba(0, 0, 0, 0.18) 45%, #000000 100%);
+  .ct-story {
+    opacity: 0.58;
+    mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.12) 34%, #000000 68%, #000000 100%);
   }
 
-  .ct-network {
-    inset: 8% -36% 0 4%;
-    width: 132%;
-    height: 88%;
+  .ct-orbit {
+    top: 10%;
+    left: 30%;
+    width: 92vw;
   }
 
-  .ct-scan-beam {
+  .ct-slice-stage {
+    top: 28%;
+    left: 28%;
+    width: 76vw;
+    opacity: 0.22;
+  }
+
+  .reconstruction-stage {
+    top: 12%;
+    right: -18%;
+    width: 70vw;
+    height: 82%;
+    opacity: 0.38;
+  }
+
+  .data-sweep {
+    right: 0;
     left: 34%;
-    width: 24vw;
   }
 
   .hero-keywords {
