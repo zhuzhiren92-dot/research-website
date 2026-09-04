@@ -47,7 +47,7 @@ export const profile = {
     'CT-based numerical modelling',
   ],
   summary:
-    'I study how particle morphology, breakage, and kinematics control the macroscopic behaviour of granular materials. By integrating in-situ X-ray micro-CT, 3D particle reconstruction and tracking, machine learning, and computational modelling, I quantify how particle microstructures evolve during loading and how those changes influence mechanical response.',
+    'I study how particle morphology, breakage, and kinematics govern the macroscopic behaviour of granular materials. Using in-situ X-ray micro-CT, I reconstruct and track individual particles in 3D. My tracking methods are designed for particles with complex shapes and severe fragmentation. I also use machine learning and computational modelling to link particle-scale evolution to mechanical response.',
   portrait: `${import.meta.env.BASE_URL}profile-photo.png`,
   heroImage: `${import.meta.env.BASE_URL}research-hero.png`,
   cvUrl: `${import.meta.env.BASE_URL}CV_EN_Zhu_Zhiren.pdf`,
@@ -58,7 +58,6 @@ export const profile = {
     { value: '3', label: ['Conference', 'papers'] },
     { value: '5+', label: ['Particle types', 'studied'] },
   ],
-  researchWorkflow: ['Imaging', 'Reconstruction', 'Tracking', 'Fracture', 'Mechanics'],
   links: [
     { label: 'Google Scholar', href: '#' },
     { label: 'ORCID', href: '#' },
