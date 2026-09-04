@@ -322,12 +322,13 @@ p {
 }
 
 .hero-role {
-  max-width: 760px;
+  max-width: 930px;
   margin: 0 0 12px;
   color: #17324d;
   font-size: clamp(1.24rem, 2.3vw, 2rem);
   font-weight: 740;
   line-height: 1.2;
+  white-space: nowrap;
 }
 
 .hero-keywords {
@@ -1367,6 +1368,10 @@ p {
 
   .home-content h1 {
     font-size: clamp(3rem, 16vw, 4.8rem);
+  }
+
+  .hero-role {
+    white-space: normal;
   }
 
   .hero-actions,
