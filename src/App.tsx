@@ -209,15 +209,15 @@ export default function App() {
             <div className="hero-actions">
               <button className="button primary" type="button" onClick={() => scrollToPanel(2)}>
                 <Microscope size={18} />
-                研究
+                Research
               </button>
               <button className="button secondary" type="button" onClick={() => scrollToPanel(3)}>
                 <BookOpen size={18} />
-                出版物
+                Publications
               </button>
               <a className="button tertiary" href={profile.cvUrl} download="CV_EN_Zhu_Zhiren.pdf">
                 <FileText size={18} />
-                简历
+                CV
               </a>
             </div>
             <div className="hero-metrics" aria-label="Research metrics">
